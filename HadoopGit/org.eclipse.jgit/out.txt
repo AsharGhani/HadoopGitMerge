@@ -1,0 +1,78 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building JGit - Core 2.4.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- build-helper-maven-plugin:1.7:parse-version (set-osgi-version) @ org.eclipse.jgit ---
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.7:run (translate-qualifier) @ org.eclipse.jgit ---
+[INFO] Executing tasks
+
+main:
+     [copy] Copying 1 file to /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/target/META-INF
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.7:run (translate-source-qualifier) @ org.eclipse.jgit ---
+[WARNING] Parameter tasks is deprecated, use target instead
+[INFO] Executing tasks
+
+main:
+     [copy] Copying 1 file to /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/target/META-INF
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:resources (default-resources) @ org.eclipse.jgit ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ org.eclipse.jgit ---
+[INFO] Compiling 28 source files to /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/target/classes
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2:jar (attach-sources) @ org.eclipse.jgit >>>
+[INFO] 
+[INFO] --- build-helper-maven-plugin:1.7:parse-version (set-osgi-version) @ org.eclipse.jgit ---
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2:jar (attach-sources) @ org.eclipse.jgit <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2:jar (attach-sources) @ org.eclipse.jgit ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:testResources (default-testResources) @ org.eclipse.jgit ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:testCompile (default-testCompile) @ org.eclipse.jgit ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.2:test (default-test) @ org.eclipse.jgit ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ org.eclipse.jgit ---
+[INFO] 
+[INFO] --- maven-javadoc-plugin:2.8.1:jar (attach-javadocs) @ org.eclipse.jgit ---
+[INFO] 
+9 warnings
+[WARNING] Javadoc Warnings
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/diff/DiffFormatter.java:260: warning - #DEFAULT_BINARY_FILE_THRESHOLD (referenced by @value tag) is an unknown reference.
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/lib/ObjectReader.java:123: warning - Constants#OBJECT_ID_STRING_LENGTH (referenced by @value tag) is an unknown reference.
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/lib/TreeFormatter.java:145: warning - Tag @link: can't find REGULAR_FILE in org.eclipse.jgit.lib.TreeFormatter
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/lib/TreeFormatter.java:121: warning - Tag @link: can't find GITLINK in org.eclipse.jgit.lib.TreeFormatter
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/lib/TreeFormatter.java:133: warning - Tag @link: can't find TREE in org.eclipse.jgit.lib.TreeFormatter
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/storage/file/WindowCache.java:123: warning - Tag @link: reference not found: Ref
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/storage/pack/PackWriter.java:360: warning - PackConfig#DEFAULT_DELTA_BASE_AS_OFFSET (referenced by @value tag) is an unknown reference.
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/storage/pack/PackWriter.java:375: warning - PackConfig#DEFAULT_DELTA_BASE_AS_OFFSET (referenced by @value tag) is an unknown reference.
+[WARNING] /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/src/org/eclipse/jgit/treewalk/CanonicalTreeParser.java:115: warning - @internal is an unknown tag.
+[INFO] Building jar: /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/target/org.eclipse.jgit-2.4.0-SNAPSHOT-javadoc.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.3.1:install (default-install) @ org.eclipse.jgit ---
+[INFO] Installing /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/target/org.eclipse.jgit-2.4.0-SNAPSHOT.jar to /Users/hamid_bably/.m2/repository/org/eclipse/jgit/org.eclipse.jgit/2.4.0-SNAPSHOT/org.eclipse.jgit-2.4.0-SNAPSHOT.jar
+[INFO] Installing /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/pom.xml to /Users/hamid_bably/.m2/repository/org/eclipse/jgit/org.eclipse.jgit/2.4.0-SNAPSHOT/org.eclipse.jgit-2.4.0-SNAPSHOT.pom
+[INFO] Installing /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/target/org.eclipse.jgit-2.4.0-SNAPSHOT-sources.jar to /Users/hamid_bably/.m2/repository/org/eclipse/jgit/org.eclipse.jgit/2.4.0-SNAPSHOT/org.eclipse.jgit-2.4.0-SNAPSHOT-sources.jar
+[INFO] Installing /Users/hamid_bably/jgit/jgit/org.eclipse.jgit/target/org.eclipse.jgit-2.4.0-SNAPSHOT-javadoc.jar to /Users/hamid_bably/.m2/repository/org/eclipse/jgit/org.eclipse.jgit/2.4.0-SNAPSHOT/org.eclipse.jgit-2.4.0-SNAPSHOT-javadoc.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 16.081s
+[INFO] Finished at: Sat Mar 16 10:38:54 EDT 2013
+[INFO] Final Memory: 14M/81M
+[INFO] ------------------------------------------------------------------------

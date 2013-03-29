@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="org.eclipse.jgit.ant.test/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.ant/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.console/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.http.server/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.http.test/tst"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.junit.http/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.junit/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.pgm.test/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.pgm.test/tst"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.pgm/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.test/exttst"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.test/tst"/>
+	<classpathentry kind="src" path="org.eclipse.jgit.ui/src"/>
+	<classpathentry kind="src" path="org.eclipse.jgit/src"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.ant/target/org.eclipse.jgit.ant-2.4.0-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.ant/target/org.eclipse.jgit.ant-2.4.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.ant/target/org.eclipse.jgit.ant-2.4.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.console/target/org.eclipse.jgit.console-2.4.0-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.console/target/org.eclipse.jgit.console-2.4.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.console/target/org.eclipse.jgit.console-2.4.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.http.server/target/org.eclipse.jgit.http.server-2.4.0-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.http.server/target/org.eclipse.jgit.http.server-2.4.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.http.server/target/org.eclipse.jgit.http.server-2.4.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.junit.http/target/org.eclipse.jgit.junit.http-2.4.0-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.junit.http/target/org.eclipse.jgit.junit.http-2.4.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.junit.http/target/org.eclipse.jgit.junit.http-2.4.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.junit/target/org.eclipse.jgit.junit-2.4.0-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.junit/target/org.eclipse.jgit.junit-2.4.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.junit/target/org.eclipse.jgit.junit-2.4.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.pgm/target/jgit-cli.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.pgm/target/org.eclipse.jgit.pgm-2.4.0-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.pgm/target/org.eclipse.jgit.pgm-2.4.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.pgm/target/org.eclipse.jgit.pgm-2.4.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.test/target/surefire/surefirebooter7438102269056820212.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.ui/target/org.eclipse.jgit.ui-2.4.0-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.ui/target/org.eclipse.jgit.ui-2.4.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit.ui/target/org.eclipse.jgit.ui-2.4.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit/target/org.eclipse.jgit-2.4.0-SNAPSHOT-javadoc.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit/target/org.eclipse.jgit-2.4.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.jgit/target/org.eclipse.jgit-2.4.0-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/hamid_bably/junit3.6/junit.jar"/>
+	<classpathentry kind="lib" path="/Users/hamid_bably/hadooptools/hadoop-1.0.4/hadoop-core-1.0.4.jar" sourcepath="/trunk"/>
+	<classpathentry kind="output" path="org.eclipse.jgit.ui/target/classes"/>
+</classpath>
