@@ -138,7 +138,7 @@ public class GitReduce
        // conf.setCombinerClass(Reduce.class);
         conf.setReducerClass(Reduce.class);
 
-        conf.setInputFormat(TextInputFormat.class);
+        conf.setInputFormat(GitInputFormat.class);
         conf.setOutputFormat(TextOutputFormat.class);
 
         FileInputFormat.setInputPaths(conf, new Path(args[0]));
