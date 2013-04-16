@@ -23,18 +23,41 @@ public class BranchMergerTester {
 	
 	public static void main(String[] args) throws IOException, OperationException
 	{
-		String userName = JOptionPane.showInputDialog("Please Enter Github username");
+		String userName = null;
+		String repositoryName = null;
+		String dir = null;
+		if (args.length == 0)
+		{
+		userName = JOptionPane.showInputDialog("Please Enter Github username");
 		if (null == userName || userName.isEmpty())
 			return;
 		
-		String repositoryName = JOptionPane.showInputDialog("Please enter Repository Name");
+		repositoryName = JOptionPane.showInputDialog("Please enter Repository Name");
 		
 		if (null == repositoryName || userName.isEmpty()) 
 			return;
 		
-		String dir = JOptionPane.showInputDialog("Please enter working directory to checkout", "/host/CS_848_Project/Testing/CloneWorkDir/");
+		dir = JOptionPane.showInputDialog("Please enter working directory to checkout", "/host/CS_848_Project/Testing/CloneWorkDir/");
 		if (dir.isEmpty())
 			dir = "/host/CS_848_Project/Testing/CloneWorkDir/";
+		}
+		else
+			{
+			if (args.length != 3)
+			{
+				System.out.println("Invalid arguments:");
+				for (String arg : args)
+				{
+					System.out.println(arg);
+				}
+				return;
+			}
+			
+			userName = args[0];
+			repositoryName = args[1];
+			dir = args[2];
+			}
+			
 		
 		if (!dir.endsWith("/"))
 			dir += "/";
@@ -74,7 +97,8 @@ public class BranchMergerTester {
 						(
 						currRepositoryURL,
 						currWorkDirectory,
-						currBranchName
+						currBranchName,
+						workDirectory
 					    );
 				} catch (OperationException e1) {
 					//_log.info("BranchMerger::MergeBraches(..) - ERROR: failed to update local repo and check cache error in getBranchesMergeRelationship");
@@ -135,7 +159,7 @@ public class BranchMergerTester {
 				
 				String parentDirName = workDirectory + hostRepo + File.separatorChar +   "Parent" + hostBranch + "-" + mergeBranch;
 				
-				if (BranchExtractor.cloneFromLocalRepository (hostBranchDir, parentDirName))
+				if (BranchExtractor.cloneFromLocalRepository (hostBranchDir, parentDirName, workDirectory))
 					BranchExtractor.checkoutChangeSet (parentDirName, parentSha1);
 				
 				outStream.write(hostBranchDir + " " + mergeBranchDir + " " + parentDirName );

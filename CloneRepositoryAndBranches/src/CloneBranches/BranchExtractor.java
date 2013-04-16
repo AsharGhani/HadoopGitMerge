@@ -173,7 +173,8 @@ public class BranchExtractor {
 	(
 	String repositoryURL,
 	String localRepo,
-	String branch
+	String branch,
+	String workDir
 	) throws OperationException, IOException 
 	{
 		// TODO Logging 
@@ -199,7 +200,7 @@ public class BranchExtractor {
 		else 
 		{
 			//_log.info("trying to create local repository: " + localRepo);
-			createLocalRepository(repositoryURL, localRepo, branch);
+			createLocalRepository(repositoryURL, localRepo, branch, workDir);
 			//_log.info("finished creating local repository: " + localRepo);
 		}
 	}
@@ -219,7 +220,8 @@ public class BranchExtractor {
 	(
 	String pathToRemoteRepo,
 	String pathToLocalRepo,
-	String branch/*,
+	String branch,
+	String workDir/*,
 	String remoteCmd*/ // TODO: is this needed?
 	) throws IOException, OperationException 
 	{
@@ -251,6 +253,15 @@ public class BranchExtractor {
 			myArgsList.add(remoteCmd);
 			command += " --remotecmd " + remoteCmd;
 		}*/
+		
+		int workDirIndex = pathToLocalRepo.indexOf(workDir);
+	
+		String pathToLocalRepoWithoutWorkDir  = pathToLocalRepo;
+		
+		if (workDirIndex > -1)
+			pathToLocalRepoWithoutWorkDir = pathToLocalRepo.substring(workDirIndex + workDir.length());
+
+			
 		myArgsList.add(pathToRemoteRepo);
 		if (branch != null)
 		{
@@ -258,17 +269,17 @@ public class BranchExtractor {
 			myArgsList.add(branch);
 		}
 		
-		myArgsList.add(pathToLocalRepo);
+		myArgsList.add(pathToLocalRepoWithoutWorkDir);
 
 		if (command != null)
 			{
 			command +=  " " + pathToRemoteRepo;
 			if (branch != null)
 				command +=  " -b " + branch;
-			command +=  " " + pathToLocalRepo;
+			command +=  " " + pathToLocalRepoWithoutWorkDir;
 			}
 		
-		Output output = RunIt.execute(pathExecutable, myArgsList.toArray(new String[0]), pathToLocalRepo, true);
+		Output output = RunIt.execute(pathExecutable, myArgsList.toArray(new String[0]), workDir, true);
 
 			/*_log.info("create local repository");
 			_log.info("run command: " + command);
@@ -298,13 +309,14 @@ public class BranchExtractor {
 			command += " --remotecmd " + remoteCmd;
 		}*/
 		
+		
 		myArgsList.add(hostBranchName);
 		myArgsList.add("remotes/origin/" + targetBranchName);
 
 		String command = pathExecutable + " merge-base";
 		
 		command +=  " " + hostBranchName;
-		command +=  " remotes/origin/" + pathToLocalRepo;
+		command +=  " remotes/origin/" + targetBranchName;
 		
 		Output output = RunIt.execute(pathExecutable, myArgsList.toArray(new String[0]), pathToLocalRepo, true);
 		
@@ -324,23 +336,38 @@ public class BranchExtractor {
 	}
 	
 	
-	public static boolean cloneFromLocalRepository(String pathToLocalRepo, String pathToNewClone) throws OperationException, IOException
+	public static boolean cloneFromLocalRepository(String pathToLocalRepo, String pathToNewClone, String workDir) throws OperationException, IOException
 	{
 		File directory = new File(pathToNewClone); 
 		if (directory.exists())
 			return false;
 		
+		int workDirIndex = pathToNewClone.indexOf(workDir);
+		
+		String pathToNewCloneWithoutWorkDir  = pathToNewClone;
+		
+		if (workDirIndex > -1)
+			pathToNewCloneWithoutWorkDir = pathToNewClone.substring(workDirIndex + workDir.length());
+		
+		
+		workDirIndex = pathToLocalRepo.indexOf(workDir);
+		
+		String pathToLocalRepoWithoutWorkDir  = pathToLocalRepo;
+		
+		if (workDirIndex > -1)
+			pathToLocalRepoWithoutWorkDir = pathToLocalRepo.substring(workDirIndex + workDir.length());
+		
 		String pathExecutable = GetExecutablePath();
 		
 		List<String> myArgsList = new ArrayList<String>();
 		myArgsList.add("clone");
-		myArgsList.add(pathToLocalRepo);
-		myArgsList.add(pathToNewClone);
+		myArgsList.add(pathToLocalRepoWithoutWorkDir);
+		myArgsList.add(pathToNewCloneWithoutWorkDir);
 		
-		Output output = RunIt.execute(pathExecutable, myArgsList.toArray(new String[0]), pathToLocalRepo, true);
+		Output output = RunIt.execute(pathExecutable, myArgsList.toArray(new String[0]), workDir, true);
 		
 		String command = pathExecutable + " clone";
-		command +=  pathToLocalRepo + " " + pathToNewClone;
+		command +=  pathToLocalRepoWithoutWorkDir + " " + pathToNewCloneWithoutWorkDir;
 		
 		if (!output.getError().isEmpty())
 		{
@@ -353,7 +380,7 @@ public class BranchExtractor {
 
 	
 	public static void checkoutChangeSet(String pathToLocalRepo, String changeSetsha1) throws IOException, OperationException
-	{		
+	{
 		String pathExecutable = GetExecutablePath();
 		
 		List<String> myArgsList = new ArrayList<String>();

@@ -83,13 +83,17 @@ public class GitReduce
 	    		  fileMergeBranch = tk.nextToken();
 	    		  fileParentBranch = tk.nextToken();
 	    		  
+	    		  // TODO: handle null file case better
+	    		  if (fileHostBranch.equals("null") || fileMergeBranch.equals("null") || fileParentBranch.equals("null"))
+	    			  continue;
+	    		  
 	    		  String fileHostBranchDir = fileHostBranch.substring(0,fileHostBranch.lastIndexOf("/"));
 	    		  String fileMergeBranchDir = fileMergeBranch.substring(0,fileMergeBranch.lastIndexOf("/"));
 	    		  
 	    		  fileHostContents = readFile(fileHostBranch);
 	    		  fileMergeContents = readFile(fileMergeBranch);
 	    		  fileParentContents = readFile(fileParentBranch);
-	    		  
+	    	
 	    		  //Input is of the form <fileHostBranch, fileMergeBranch, fileParentBranch>
 		    	  //Output is of the form <fileHostBranch, fileMergeBranch, 0/1>
 	    		  IntWritable conflict = new IntWritable(merge(fileHostContents, fileMergeContents, fileParentContents, Charset.forName("UTF-8")));

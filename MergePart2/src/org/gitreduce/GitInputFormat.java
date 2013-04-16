@@ -181,45 +181,57 @@ public class GitInputFormat extends FileInputFormat<LongWritable, Text>  {
 
 		if (!forceAssign)
 			{
-			if (m_numSplitsFilled == m_numSplits)
+			if (m_numSplitsFilled == m_numSplits) //TODO
 				forceAssign = true;
 			}
 		
 		// Try assigning to the host first;
+		final String nullString = "null";
 		
-		String nodeName = GetNodeNameForPath(fs, hostBranchFile);
+		
+		if (!hostBranchFile.equals(nullString))
+		{
+			String nodeName = GetNodeNameForPath(fs, hostBranchFile);
 
-		int nodeIndex = GetNodeIndex(nodes, nodeName);
-		
-		if (-1 == nodeIndex)
-			throw new IOException ("Cannot find index for host from the hosts list");
-			
-		if (nodeIndex >= allNodeInputLists.size())
-			throw new IOException ("Invalid node Index");
-		
-		GitInputSplit[] nodeSplits =  allNodeInputLists.get(nodeIndex);
-		
-		//if (false == m_nodeFilledFlags[nodeIndex] || forceAssign)
-		//{
+			int nodeIndex = GetNodeIndex(nodes, nodeName);
+
+			if (-1 == nodeIndex)
+				throw new IOException ("Cannot find index for host from the hosts list");
+
+			if (nodeIndex >= allNodeInputLists.size())
+				throw new IOException ("Invalid node Index");
+
+			GitInputSplit[] nodeSplits =  allNodeInputLists.get(nodeIndex);
+
+			//if (false == m_nodeFilledFlags[nodeIndex] || forceAssign)
+			//{
 			if (AssignToSplits (nodeSplits, nodeName, hostBranchFile, mergeBranchFile, parentBranchFile, size, forceAssign))
 				return true;
-		//}
+			//}
+		}
 		
+
 		// Try assigning to branch
-        nodeName = GetNodeNameForPath(fs, mergeBranchFile);
+		if (!mergeBranchFile.equals(nullString))
+		{
+			String nodeName = GetNodeNameForPath(fs, mergeBranchFile);
 
-		nodeIndex = GetNodeIndex(nodes, nodeName);
-		
-		if (-1 == nodeIndex)
-			throw new IOException ("Cannot find index for host from the hosts list");
-		
-		nodeSplits =  allNodeInputLists.get(nodeIndex);
+			int nodeIndex = GetNodeIndex(nodes, nodeName);
 
-		//if (false == m_nodeFilledFlags[nodeIndex] || forceAssign)
-		//{
-		    if (AssignToSplits (nodeSplits, nodeName, hostBranchFile, mergeBranchFile, parentBranchFile, size, forceAssign))
-		    	return true;
-		//}	
+			if (-1 == nodeIndex)
+				throw new IOException ("Cannot find index for host from the hosts list");
+
+			GitInputSplit[] nodeSplits =  allNodeInputLists.get(nodeIndex);
+
+			//if (false == m_nodeFilledFlags[nodeIndex] || forceAssign)
+			//{
+			if (AssignToSplits (nodeSplits, nodeName, hostBranchFile, mergeBranchFile, parentBranchFile, size, forceAssign))
+				return true;
+			//}	
+		}
+		else if (forceAssign) 
+			return true; // this means both are null no need to assign
+			
 		
 		return false;
 	}
@@ -265,6 +277,7 @@ public class GitInputFormat extends FileInputFormat<LongWritable, Text>  {
 				throw new IOException ("Couldn't get a smallestSplit for node " + nodeName);
 			
 			smallestSplit.AddMergeInfo(nodeName, hostBranchFile, mergeBranchFile, parentBranchFile, size);
+			return true;
 		}
 		
 		return false;
