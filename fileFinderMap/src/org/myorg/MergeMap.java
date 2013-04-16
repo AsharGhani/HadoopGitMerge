@@ -101,6 +101,9 @@ public class MergeMap {
 	public void updateState(FileStatus stat, boolean ommitDirectory, 
 			boolean fasterImplementation){
 		
+		if (-1 != stat.getPath().getName().indexOf(".git"))
+			return;
+		
 		if (stat.isDir() && ommitDirectory) return;
 		ArrayList<FileStatus> tempStat =getStatus();
 		tempStat.add(stat);
@@ -216,7 +219,7 @@ public class MergeMap {
 	        }
 	        
 	        for (int i = 0 ; i < mergePathNames.size(); i ++){
-	        	String currMergePathName = hostPathNames.get(i);
+	        	String currMergePathName = mergePathNames.get(i);
 	        	String predictedParentPathName = currMergePathName.replace(mergeBranchDir, parentBranchDir);
 	        	
 	        	int parentBranchIndex = parentPathNames.indexOf(predictedParentPathName);
@@ -236,6 +239,9 @@ public class MergeMap {
 	        		parentFileSizes.remove(parentBranchIndex);
         		}
         		else{
+        			boolean b = false;
+        			if (b)
+        				throw new IOException(" Curr branch: " + currMergePathName + "Parent Expected: " + predictedParentPathName);
         			output.collect(new Text("null " + currMergePathName + " null"), 
         					new LongWritable(currMergeFileSize) );
         		}
