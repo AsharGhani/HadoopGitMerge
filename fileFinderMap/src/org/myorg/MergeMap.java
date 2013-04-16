@@ -84,6 +84,10 @@ public class MergeMap {
 	
 	public void ls(FileStatus src, FileSystem srcFs, boolean recursive){
 		final String cmd = recursive? "lsr": "ls";
+		
+		if (-1 != src.getPath().getName().indexOf(".git"))
+			return;
+		
 		final FileStatus[] items = shellListStatus(cmd, srcFs, src);
 		for (int i = 0; i < items.length; i ++){
 			FileStatus stat = items[i];
@@ -143,7 +147,7 @@ public class MergeMap {
 	        
 	        hostBranchDir = tokenizer.nextToken();
 	        mergeBranchDir = tokenizer.nextToken();
-	        parentBranchDir = tokenizer.nextToken();
+	        parentBranchDir = tokenizer.nextToken()+"/";
 	        
 	        //Obtain the required file statuses
 	        mmapHost.recursive_ls(hostBranchDir);
@@ -164,12 +168,20 @@ public class MergeMap {
 	        	String predictedMergePathName = currHostPathName.replace(hostBranchDir, mergeBranchDir);
 	        	String predictedParentPathName = currHostPathName.replace(hostBranchDir, parentBranchDir);
 	        	
-	        	int mergeBranchIndex = predictedMergePathName.indexOf(predictedMergePathName);
-	        	int parentBranchIndex = predictedParentPathName.indexOf(predictedParentPathName);
+	        	int mergeBranchIndex = mergePathNames.indexOf(predictedMergePathName);
+	        	int parentBranchIndex = parentPathNames.indexOf(predictedParentPathName);
 	        	
 	        	Long currHostFileSize = hostFileSizes.get(i);
-	        	Long currMergeFileSize = mergeFileSizes.get(mergeBranchIndex);
-	        	Long currParentFileSize = parentFileSizes.get(parentBranchIndex);
+	        	Long currMergeFileSize = 0L;
+	        	Long currParentFileSize = 0L;
+	        	
+	        	if (mergeBranchIndex > -1){
+	        		currMergeFileSize = mergeFileSizes.get(mergeBranchIndex);
+	        	}
+	        	
+	        	if (parentBranchIndex > -1){
+	        		currParentFileSize = parentFileSizes.get(parentBranchIndex);
+	        	}
 	        	
 	        	if (mergePathNames.contains(predictedMergePathName)){
 	        		if (parentPathNames.contains(predictedParentPathName)){
@@ -207,10 +219,14 @@ public class MergeMap {
 	        	String currMergePathName = hostPathNames.get(i);
 	        	String predictedParentPathName = currMergePathName.replace(mergeBranchDir, parentBranchDir);
 	        	
-	        	int parentBranchIndex = predictedParentPathName.indexOf(predictedParentPathName);
+	        	int parentBranchIndex = parentPathNames.indexOf(predictedParentPathName);
 
 	        	Long currMergeFileSize = mergeFileSizes.get(i);
-	        	Long currParentFileSize = parentFileSizes.get(parentBranchIndex);
+	        	Long currParentFileSize = 0L;
+	        	
+	        	if (parentBranchIndex > -1){
+	        		currParentFileSize = parentFileSizes.get(parentBranchIndex);
+	        	}
 
 	        	if (parentPathNames.contains(predictedParentPathName)){
         			output.collect(new Text("null " + currMergePathName + 
@@ -225,7 +241,7 @@ public class MergeMap {
         		}
 	        }
 	        
-	        for (int i = 0 ; i < mergePathNames.size(); i ++){
+	        for (int i = 0 ; i < parentPathNames.size(); i ++){
 	        	output.collect(new Text("null null " + parentPathNames.get(i)), 
         					new LongWritable(parentFileSizes.get(i)) );
 	        }
@@ -239,11 +255,9 @@ public class MergeMap {
 	      conf.setJobName("MergeMap1");
 
 	      conf.setOutputKeyClass(Text.class);
-	      conf.setOutputValueClass(IntWritable.class);
+	      conf.setOutputValueClass(LongWritable.class);
 
 	      conf.setMapperClass(Map.class);
-	      conf.setMapOutputValueClass(LongWritable.class);
-	      conf.setMapOutputKeyClass(Text.class);
 
 	      conf.setInputFormat(TextInputFormat.class);
 	      conf.setOutputFormat(TextOutputFormat.class);

@@ -36,6 +36,9 @@ public class BranchMergerTester {
 		if (dir.isEmpty())
 			dir = "/host/CS_848_Project/Testing/CloneWorkDir/";
 		
+		if (!dir.endsWith("/"))
+			dir += "/";
+		
 		GetAllBranchesOfRepostiroyAndParents(userName, repositoryName, dir, true);
 	}
 	
