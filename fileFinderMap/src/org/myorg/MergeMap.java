@@ -85,8 +85,19 @@ public class MergeMap {
 	public void ls(FileStatus src, FileSystem srcFs, boolean recursive){
 		final String cmd = recursive? "lsr": "ls";
 		
-		if (-1 != src.getPath().getName().indexOf(".git"))
+		String fileName = src.getPath().getName(); 
+		if (-1 != fileName.indexOf(".git"))
 			return;
+		
+		if (fileName.endsWith(".jar"))
+			return;
+		
+		if (fileName.endsWith(".class"))
+			return;
+			
+		if (fileName.endsWith(".png"))
+		    return;
+		
 		
 		final FileStatus[] items = shellListStatus(cmd, srcFs, src);
 		for (int i = 0; i < items.length; i ++){
@@ -101,8 +112,18 @@ public class MergeMap {
 	public void updateState(FileStatus stat, boolean ommitDirectory, 
 			boolean fasterImplementation){
 		
-		if (-1 != stat.getPath().getName().indexOf(".git"))
+		String fileName = stat.getPath().getName(); 
+		if (-1 != fileName.indexOf(".git"))
+			return;		
+		
+		if (fileName.endsWith(".jar"))
 			return;
+		
+		if (fileName.endsWith(".class"))
+			return;
+			
+		if (fileName.endsWith(".png"))
+		    return;
 		
 		if (stat.isDir() && ommitDirectory) return;
 		ArrayList<FileStatus> tempStat =getStatus();
